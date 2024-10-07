@@ -3,16 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
     <script src="life.js" defer></script>
 </head>
 <body>
-    <p id="display_lives">live bullets: </p>
-    <p id="display_blanks"></p>
-    <button onclick="shootYourself()">You</button>
-    <button onclick="shootThem()">Dealer</button>
-    <p id="display_player_life"></p>
-    <p id="display_dealer_life"></p>
-
+    <div>
+        <p id="display_lives">live bullets: </p>
+        <p id="display_blanks"></p>
+        <button class="button button1" onclick="shootYourself()">You</button>
+        <button class="button button1" onclick="shootThem()">Dealer</button>
+        <p id="display_player_life"></p>
+        <p id="display_dealer_life"></p>
+    </div>
+    <table>
+        <tr>
+            <th colspan="2">Rules:</th>
+        </tr>
+        <tr>
+            <td>
+                Dealer dies
+            </td>
+            <td>
+                100$
+            </td>
+        </tr>
+        <tr>
+            <td>
+               You die
+            </td>
+            <td>
+                0$ (obviously)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Dealer shot
+            </td>
+            <td>
+                50$
+            </td>
+        </tr>
+        <tr>
+            <td>
+                You shot yourself
+            </td>
+            <td>
+                -10$
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Blank at yourself
+            </td>
+            <td>
+                30$
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Blank at the dealer
+            </td>
+            <td>
+                -15$
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
