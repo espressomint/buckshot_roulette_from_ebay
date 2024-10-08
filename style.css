@@ -45,3 +45,15 @@ div{
     margin-right:auto;
 
 }
+.beer{
+    display: none;
+}
+.knife{
+    display: none;
+}
+.phone{
+    display: none;
+}
+.spyglass{
+    display: none;
+}
