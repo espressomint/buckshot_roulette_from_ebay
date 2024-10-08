@@ -2,7 +2,7 @@
 // for example beer casues the spyglass(fixed) and phone to break
 //also if there is two same items the buttons will only show up once and not twice
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-let global_lives = Math.floor(Math.random() * 2) + 2
+let global_lives = Math.floor(Math.random() * 6) + 1
 let player = parseInt(global_lives)
 let dealer = parseInt(global_lives)
 let bullets = []
@@ -10,33 +10,48 @@ let items = []
 let items_names = []
 let live_bullets = 0
 let blank_bullets = 0
-
 let money = 0
-//heatlh
-for(let i = 0; i < 6; i++){
-    bullets.push(Math.floor(Math.random() * 2))
+
+function round(){
+    //bullets
+    for(let i = 0; i < 6; i++){
+        bullets.push(Math.floor(Math.random() * 2))
+    }
+
+    for(let y = 0; y < 2; y++){
+        items.push(Math.floor(Math.random() * 4) + 1)
+    }
+    //assign type of bullets
+    for (let n = 0; n < bullets.length; n++){
+        if(bullets[n] == 1){
+            live_bullets++
+        }else{
+            blank_bullets++
+        }
+    }
+    //item deposit
+    for (let m = 0; m < items.length; m++){
+        switch(true){
+            case items[m] == 1:
+                items_names.push("beer")
+                break;
+            case items[m] == 2:
+                items_names.push("knife")
+                break;
+            case items[m] == 3:
+                items_names.push("spyglass")
+                break;
+            case items[m] == 4:
+                items_names.push("phone")
+                break;
+        }   
+    }
+    let blank_display = document.getElementById("display_blanks");
+    blank_display.innerHTML = ("blank bullets: " +blank_bullets)
+    let live_display = document.getElementById("display_lives");
+    live_display.innerHTML = ("live bullets: " + live_bullets)
 }
-//bullets
-for(let y = 0; y < 2; y++){
-    items.push(Math.floor(Math.random() * 4) + 1)
-}
-//item deposit
-for (let m = 0; m < items.length; m++){
-    switch(true){
-        case items[m] == 1:
-            items_names.push("beer")
-            break;
-        case items[m] == 2:
-            items_names.push("knife")
-            break;
-        case items[m] == 3:
-            items_names.push("spyglass")
-            break;
-        case items[m] == 4:
-            items_names.push("phone")
-            break;
-    }   
-}
+window.onload = round()
 //item showup logic (very basic and flawed)
 if (items_names.includes("beer")){
     document.getElementById("beer").style.display = "inline"
@@ -52,14 +67,7 @@ if (items_names.includes("spyglass")){
 }
 console.log(items)
 console.log(items_names)
-//assign type of bullets
-for (let n = 0; n < bullets.length; n++){
-    if(bullets[n] == 1){
-        live_bullets++
-    }else{
-        blank_bullets++
-    }
-}
+
 //zero bullets of each type check
 // if(live_bullets || blank_bullets == 0){
 //     window.location.reload()
@@ -87,13 +95,13 @@ function shootYourself(){
             money = money = 0
             alert("you dead, you earned: nothing lmao" );
             window.location.reload()
-            break;
-        case bullets.length == 0:
-            money = money + 15
-            alert("you both live")
-            window.location.reload()
-            break;
+            break;          
     }
+    if(bullets.length == 0){
+        round()
+    }
+
+
     let life_display = document.getElementById("display_player_life");
     life_display.innerHTML = ("player: " + player)
     let dealer_display = document.getElementById("display_dealer_life");
@@ -121,11 +129,9 @@ function shootThem(){
             alert("you dead")
             window.location.reload()
             break;
-        case bullets.length == 0:
-            money = money + 15
-            alert("you both live")
-            window.location.reload()
-            break;
+    }
+    if(bullets.length == 0){
+        round()
     }
     let life_display = document.getElementById("display_player_life");
     life_display.innerHTML = ("player: " + player)
@@ -148,6 +154,7 @@ function usePhone(){
     document.getElementById("phone").style.display = "none";
 }
 function useKnife(){
+    current_bullet = bullets[0]
     if(current_bullet == 1){
         dealer = dealer - 2;
         alert("arent you lucky")
@@ -166,11 +173,9 @@ function useKnife(){
             alert("you dead, you earned: nothing lmao" );
             window.location.reload()
             break;
-        case bullets.length == 0:
-            money = money + 15
-            alert("you both live")
-            window.location.reload()
-            break;
+    }
+    if(bullets.length == 0){
+        round()
     }
     bullets.shift()
     let life_display = document.getElementById("display_player_life");
@@ -193,10 +198,7 @@ function useSpyglass(){
 }
 
 //display shit
-let blank_display = document.getElementById("display_blanks");
-blank_display.innerHTML = ("blank bullets: " +blank_bullets)
-let live_display = document.getElementById("display_lives");
-live_display.innerHTML = ("live bullets: " + live_bullets)
+
 let life_display = document.getElementById("display_player_life");
 life_display.innerHTML = ("player: " + player)
 let dealer_display = document.getElementById("display_dealer_life");
