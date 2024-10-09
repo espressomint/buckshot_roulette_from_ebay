@@ -1,6 +1,9 @@
 //logic needs a lot of fixing: 
 // for example beer casues the spyglass(fixed) and phone to break
 //also if there is two same items the buttons will only show up once and not twice
+//knife logic is fucked and new round makes hp display go nuts
+//just need to do some code refubrish cause there a lot going on and it's easy to get lost
+//also need to to move some variables or at least make it look and work more appealing.
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 let global_lives = Math.floor(Math.random() * 6) + 1
 let player = parseInt(global_lives)
@@ -174,9 +177,6 @@ function useKnife(){
             window.location.reload()
             break;
     }
-    if(bullets.length == 0){
-        round()
-    }
     bullets.shift()
     let life_display = document.getElementById("display_player_life");
     life_display.innerHTML = ("player: " + player)
@@ -196,7 +196,9 @@ function useSpyglass(){
     }
     document.getElementById("spyglass").style.display = "none";
 }
-
+if(bullets.length == 0){
+    round()
+}   
 //display shit
 
 let life_display = document.getElementById("display_player_life");
