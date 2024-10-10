@@ -8,18 +8,29 @@
     <script src="life.js" defer></script>
 </head>
 <body>
-    <div>
-        <p id="display_lives">live bullets: </p>
-        <p id="display_blanks"></p>
-        <button class="button button1" onclick="shootYourself()">You</button>
-        <button class="button button1" onclick="shootThem()">Dealer</button>
-        <p id="display_player_life"></p>
-        <p id="display_dealer_life"></p>
-        <button class="button button1 item" id="beer" onclick="useBeer()">Beer</button>
-        <button class="button button1 item" id="knife" onclick="useKnife()">Knife</button>
-        <button class="button button1 item" id="phone" onclick="usePhone()">Phone</button>
-        <button class="button button1 item" id="spyglass" onclick="useSpyglass()">Spyglass</button>
+    <div class="container">
+        <div class="bulletsInfo">
+            <p id="display_lives"></p>
+            <p id="display_blanks"></p>
+        </div>
 
+        <div class="shootDecision">
+            <button class="button button1" onclick="shootYourself()">You</button>
+            <button class="button button1" onclick="shootThem()">Dealer</button>
+        </div>
+
+        <div class="healthInfo">
+            <p id="display_player_life"></p>
+            <p id="display_dealer_life"></p>
+        </div>
+        
+        <div class="itemSelection">
+            <button class="button button1 item" id="beer" onclick="useBeer()">Beer</button>
+            <button class="button button1 item" id="knife" onclick="useKnife()">Knife</button>
+            <button class="button button1 item" id="phone" onclick="usePhone()">Phone</button>
+            <button class="button button1 item" id="spyglass" onclick="useSpyglass()">Spyglass</button>
+            <button class="button button1 item" id="cigarettes" onclick="useCigarretes()">Cigarettes</button>
+        </div>
     </div>
     <table>
         <tr>

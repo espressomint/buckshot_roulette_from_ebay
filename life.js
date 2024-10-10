@@ -1,6 +1,6 @@
 //spyglass and phone fixed
 //there can only be two different items and no duplicates
-//blank and live bullets counter fix need
+//each round there are new items
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 let global_lives = Math.floor(Math.random() * 5) + 2
 // let player = parseInt(global_lives)
@@ -9,6 +9,7 @@ let player = 20
 let dealer = 20
 let bullets = []
 let items = []
+let round = 1
 let items_names = []
 let live_bullets = 0
 let blank_bullets = 0
@@ -27,16 +28,16 @@ function rollBullets(){
     }
     console.log(bullets)
     let blank_display = document.getElementById("display_blanks");
-    blank_display.innerHTML = (blank_bullets)
+    blank_display.innerHTML = ("blanks: " + blank_bullets)
     let live_display = document.getElementById("display_lives");
-    live_display.innerHTML = (live_bullets)
+    live_display.innerHTML = ("lives: " +live_bullets)
 }
 function rollItems(){
     for(let y = 0; y < 2; y++){
-        items.push(Math.floor(Math.random() * 4) + 1)
+        items.push(Math.floor(Math.random() * 5) + 1)
     }
     for (let m = 0; m < items.length; m++) {
-        switch (true) {
+        switch(true) {
             case items[m] == 1:
                 items_names.push("beer")
                 break;
@@ -49,8 +50,12 @@ function rollItems(){
             case items[m] == 4:
                 items_names.push("phone")
                 break;
+            case items[m] == 5:
+                items_names.push("cigarettes")
         }
     }
+    console.log(items)
+    console.log(items_names)
     if (items_names.includes("beer")){
         document.getElementById("beer").style.display = "inline"
     }
@@ -62,6 +67,9 @@ function rollItems(){
     }
     if (items_names.includes("spyglass")){
         document.getElementById("spyglass").style.display = "inline"
+    }
+    if (items_names.includes("cigarettes")){
+        document.getElementById("cigarettes").style.display = "inline"
     }
     if (items[0] == items[1]){
         window.location.reload()
@@ -100,8 +108,13 @@ function shootYourself(){
     }
     console.log("array after shooting at yourself" + bullets)
     if (bullets.length == 0){
+        // document.getElementsByClassName("item").style.display = "none"
+        round++
+        items=[]
+        items_names =[]
         rollBullets()
         rollItems()
+        alert("round: " + round)
     }
     let life_display = document.getElementById("display_player_life");
     life_display.innerHTML = ("player: " + player)
@@ -152,8 +165,11 @@ function useBeer(){
             break;
     }
     if(bullets.length == 0){
+        document.getElementsByClassName("item").style.display = "none"
+        round++
         rollBullets()
         rollItems()
+        alert("round: " + round)
     }
     console.log("array after drink: " + bullets)
 }
@@ -183,9 +199,11 @@ function useKnife(){
         
     }
     if(bullets.length == 0){
+        document.getElementsByClassName("item").style.display = "none"
+        round++
         rollItems()
         rollBullets()
-
+        alert("round: " + round)
     }
     let life_display = document.getElementById("display_player_life");
     life_display.innerHTML = ("player: " + player)
@@ -217,7 +235,15 @@ function useSpyglass(){
     document.getElementById("spyglass").style.display = "none";
     console.log("array after using spyglass: " + bullets)
 }
-
+function useCigarretes(){
+    player++
+    let life_display = document.getElementById("display_player_life");
+    life_display.innerHTML = ("player: " + player)
+    let dealer_display = document.getElementById("display_dealer_life");
+    dealer_display.innerHTML = ("dealer: " + dealer)
+    document.getElementById("cigarettes").style.display = "none"
+    alert("more health");
+}
 let life_display = document.getElementById("display_player_life");
 life_display.innerHTML = ("player: " + player)
 let dealer_display = document.getElementById("display_dealer_life");
